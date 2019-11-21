@@ -1,6 +1,4 @@
-from bidict import bidict
+from bidict import bidict, IGNORE
 
 class World:
-    locations = bidict()
-
-
+    locations = {}

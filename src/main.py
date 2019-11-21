@@ -2,12 +2,9 @@
 from lib.World import World
 from lib.world.Entity import Entity
 
+entity1 = Entity();
+entity2 = Entity();
 
-print("Hello World")
-print(id(World.locations))
-
-entity = Entity()
-World.locations[1] = entity
-print(World.locations.inverse[entity])
-print(id(entity))
-print(id(World.locations[1]))
+print(World.locations)
+entity1.setLocation((0,2))
+print(World.locations)
