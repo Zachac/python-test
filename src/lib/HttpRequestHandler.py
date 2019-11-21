@@ -2,6 +2,7 @@
 import pprint
 from http.server import BaseHTTPRequestHandler
 from lib.World import World
+from lib.world.Map import Map
 
 class HttpRequestHandler(BaseHTTPRequestHandler):
 
@@ -17,10 +18,11 @@ class HttpRequestHandler(BaseHTTPRequestHandler):
         else:
             self.send_response(200)
 
-        self.send_header("Content-type", "application/json")
+        self.send_header("Content-type", "text/plain")
         self.end_headers()
-        self.wfile.write(bytes(pprint.pformat(World.locations), 'utf-8'))
+        self.wfile.write(bytes(pprint.pformat(handler(self)), 'utf-8'))
 
 
 HttpRequestHandler.handlers["/world"] = lambda self: World.locations
 HttpRequestHandler.handlers["/entity"] = lambda self: None
+HttpRequestHandler.handlers["/map"] = lambda self: Map.getMap(0,0)
