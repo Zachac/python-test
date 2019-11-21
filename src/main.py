@@ -5,6 +5,7 @@ from lib.world.Entity import Entity
 entity1 = Entity();
 entity2 = Entity();
 
-print(World.locations)
-entity1.setLocation((0,2))
-print(World.locations)
+print(World.getEntities((0,0)))
+entity2.setLocation((0,2))
+print(World.getEntities((0,0)))
+print(World.getEntities((0,2)))
