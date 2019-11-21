@@ -1,20 +1,17 @@
 #!/usr/bin/python3.7
-from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
+import cherrypy
 
 from lib.World import World
 from lib.world.Entity import Entity
-from lib.HttpRequestHandler import HttpRequestHandler
+from lib.CherryRequestHandler import CherryRequestHandler
 
-def run(server_class=ThreadingHTTPServer, handler_class=BaseHTTPRequestHandler):
-    server_address = ('', 8000)
-    httpd = server_class(server_address, handler_class)
-    httpd.serve_forever()
 
-Entity()
-Entity().setLocation((0, 2))
+if __name__ == "__main__":
+    Entity()
+    Entity().setLocation((0, 2))
 
-try:
-    print("starting server")
-    run(handler_class=HttpRequestHandler)
-except KeyboardInterrupt:
-    pass
+    try:
+        print("starting server")
+        cherrypy.quickstart(CherryRequestHandler())
+    except KeyboardInterrupt:
+        pass

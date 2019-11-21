@@ -14,8 +14,8 @@ class Map:
     @staticmethod
     def getMap(x, y):
         result = ""
-        for i in range(x - 5, x + 5):
-            for j in range(y - 5, y + 5):
+        for i in range(x - 10, x + 10):
+            for j in range(y - 10, y + 10):
                 result += Map.icon(i, j)
             result += "\n"
         return result
