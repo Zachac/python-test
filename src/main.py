@@ -1,11 +1,20 @@
-#!/usr/bin/python3
+#!/usr/bin/python3.7
+from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
+
 from lib.World import World
 from lib.world.Entity import Entity
+from lib.HttpRequestHandler import HttpRequestHandler
 
-entity1 = Entity();
-entity2 = Entity();
+def run(server_class=ThreadingHTTPServer, handler_class=BaseHTTPRequestHandler):
+    server_address = ('', 8000)
+    httpd = server_class(server_address, handler_class)
+    httpd.serve_forever()
 
-print(World.getEntities((0,0)))
-entity2.setLocation((0,2))
-print(World.getEntities((0,0)))
-print(World.getEntities((0,2)))
+Entity()
+Entity().setLocation((0, 2))
+
+try:
+    print("starting server")
+    run(handler_class=HttpRequestHandler)
+except KeyboardInterrupt:
+    pass

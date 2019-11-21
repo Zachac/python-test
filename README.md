@@ -1,2 +1,2 @@
 ## Dependencies
-* bidict
+* python3.7
