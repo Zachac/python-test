@@ -1,4 +1,5 @@
 import itertools
+import pickle
 
 class World:
     _instance = None
@@ -17,3 +18,13 @@ World._instance = World();
 
 def world():
     return World._instance
+
+def save():
+    f = open('saves/world.pickle', 'wb')
+    pickle.dump(World._instance, f)
+    f.close()
+
+def load():
+    f = open('saves/world.pickle', 'rb')
+    World._instance = pickle.load(f)
+    f.close()
