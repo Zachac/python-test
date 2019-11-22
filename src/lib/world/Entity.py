@@ -1,20 +1,18 @@
-from lib.World import World
-import itertools
+from lib.World import world
 
 class Entity:
-    _generateId = itertools.count(1).__next__;
     
     def __init__(self):
         self._location = None
         self.wheight = None
         self.name = None
         self.setLocation((0,0))
-        self.id = Entity._generateId()
+        self.id = world().nextId()
 
     def setLocation(self, value):
-        World.locations.get(self._location, [self]).remove(self)
+        world().locations.get(self._location, [self]).remove(self)
         self._location = value
-        World.locations.setdefault(self._location, []).append(self)
+        world().locations.setdefault(self._location, []).append(self)
 
     def getLocation(self):
         return self._location

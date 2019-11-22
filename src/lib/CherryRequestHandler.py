@@ -1,6 +1,6 @@
 import cherrypy
 import pprint
-from lib.World import World
+from lib.World import world
 from lib.world.Map import Map
 
 class CherryRequestHandler(object):
@@ -12,4 +12,4 @@ class CherryRequestHandler(object):
     @cherrypy.expose
     def locations(self):
         cherrypy.response.headers['Content-Type'] = 'text/plain'
-        return pprint.pformat(World.locations)
+        return pprint.pformat(world().locations)

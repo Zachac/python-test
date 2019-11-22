@@ -1,7 +1,6 @@
 #!/usr/bin/python3.7
 import cherrypy
 
-from lib.World import World
 from lib.world.Entity import Entity
 from lib.CherryRequestHandler import CherryRequestHandler
 
