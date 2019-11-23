@@ -17,12 +17,3 @@ class Entity:
 
     def getLocation(self):
         return self._location
-
-    def __repr__(self):
-        result = "Entity("
-        result += f"name={self.name}, "
-        result += f"location={self._location}, "
-        result += f"id={self.id}, "
-        result += f"wheight={self.wheight}"
-        result += ")"
-        return result

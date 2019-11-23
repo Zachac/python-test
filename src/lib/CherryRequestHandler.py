@@ -34,3 +34,13 @@ class CherryRequestHandler(object):
         password = data['password']
         cherrypy.response.headers['Content-Type'] = 'text/plain'
         return pprint.pformat(world().users.login(username, password))
+
+    @cherrypy.expose
+    @cherrypy.tools.json_in()
+    def register(self):
+        data = cherrypy.request.json
+        username = data['username']
+        password = data['password']
+        cherrypy.response.headers['Content-Type'] = 'text/plain'
+        world().users.register(username, password)
+        return "Success!"

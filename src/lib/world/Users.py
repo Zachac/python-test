@@ -16,6 +16,24 @@ class Users:
         else:
             return user.login(password)
 
+    def register(self, name, password):
+        user = self.all.get(name, None)
+
+        if user == None:
+            lock = Lock()
+            result = self.all.setdefault(name, lock)
+
+            # handle possible race condition
+            if lock != result:
+                raise cherrypy.HTTPError(409)
+
+            self.all[name] = User(name, password)
+        else:
+            raise cherrypy.HTTPError(409)
+
+class Lock:
+    pass
+
 class User(Entity):
 
     def __init__(self, name, password):
