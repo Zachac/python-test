@@ -41,6 +41,7 @@ class Lock:
 class User(Entity):
 
     def __init__(self, name, password):
+        Entity.__init__(self)
         self.name = name
         self.password = bcrypt.hashpw(password, bcrypt.gensalt())
         self.sessions = []

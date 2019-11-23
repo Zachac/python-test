@@ -2,7 +2,7 @@
 import cherrypy
 
 from lib.world.Entity import Entity
-from lib.CherryRequestHandler import CherryRequestHandler
+from lib.http.CherryRequestHandler import CherryRequestHandler
 
 
 if __name__ == "__main__":
