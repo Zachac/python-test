@@ -1,5 +1,7 @@
 import bcrypt
 import cherrypy
+import uuid
+from lib.http.SimpleHttpError import SimpleHttpError
 
 from lib.world.Entity import Entity
 
@@ -12,7 +14,7 @@ class Users:
         user = self.all.get(name, None)
 
         if user == None:
-            raise cherrypy.HTTPError(404)
+                raise SimpleHttpError(404, 'User does not exist')
         else:
             return user.login(password)
 
@@ -25,11 +27,11 @@ class Users:
 
             # handle possible race condition
             if lock != result:
-                raise cherrypy.HTTPError(409)
+                raise SimpleHttpError(409, 'User already exists')
 
             self.all[name] = User(name, password)
         else:
-            raise cherrypy.HTTPError(409)
+            raise SimpleHttpError(409, 'User already exists')
 
 class Lock:
     pass
@@ -39,9 +41,18 @@ class User(Entity):
     def __init__(self, name, password):
         self.name = name
         self.password = bcrypt.hashpw(password, bcrypt.gensalt())
+        self.sessions = []
 
     def login(self, password):
         if bcrypt.checkpw(password, self.password):
             return self
         else:
-            raise cherrypy.HTTPError(401)
+            raise SimpleHttpError(401, 'Invalid password')
+
+    def generateSession(self):
+        sesssionId = uuid.uuid4().int
+        self.session.apppend(sesssionId)
+        
+    def validateSessionId(self, sessionId):
+        if not sessionId in self.sessions:
+            raise cherrypy.HTTPError(401, 'Invalid sessionId')
