@@ -1,12 +1,15 @@
 import itertools
 import pickle
 
+from lib.world.Users import Users
+
 class World:
     _instance = None
 
     def __init__(self):
         self.locations = {}
         self._idGenerator = itertools.count(1).__next__;
+        self.users = Users()
 
     def nextId(self):
         return self._idGenerator()

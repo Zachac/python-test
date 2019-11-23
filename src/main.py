@@ -6,6 +6,8 @@ from lib.CherryRequestHandler import CherryRequestHandler
 
 
 if __name__ == "__main__":
+    Entity()
+
     try:
         print("starting server")
         cherrypy.quickstart(CherryRequestHandler())
