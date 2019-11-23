@@ -1,6 +1,8 @@
 import bcrypt
 import cherrypy
 import uuid
+import os
+
 from lib.http.SimpleHttpError import SimpleHttpError
 
 from lib.world.Entity import Entity
@@ -45,13 +47,14 @@ class User(Entity):
 
     def login(self, password):
         if bcrypt.checkpw(password, self.password):
-            return self
+            return self.generateSession()
         else:
             raise SimpleHttpError(401, 'Invalid password')
 
     def generateSession(self):
-        sesssionId = uuid.uuid4().int
-        self.session.apppend(sesssionId)
+        sessionId = str(uuid.UUID(bytes=os.urandom(16)))
+        self.sessions.append(sessionId)
+        return sessionId
         
     def validateSessionId(self, sessionId):
         if not sessionId in self.sessions:

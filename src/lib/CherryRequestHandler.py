@@ -33,7 +33,10 @@ class CherryRequestHandler(object):
         username = data['username']
         password = data['password']
         cherrypy.response.headers['Content-Type'] = 'text/plain'
-        return pprint.pformat(world().users.login(username, password))
+        sessionId = world().users.login(username, password)
+        cherrypy.response.cookie['session'] = sessionId
+        cherrypy.response.cookie['username'] = username
+        return b''
 
     @cherrypy.expose
     @cherrypy.tools.json_in()
