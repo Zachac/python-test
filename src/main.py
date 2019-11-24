@@ -9,7 +9,9 @@ if __name__ == "__main__":
     Entity()
 
     try:
-        print("starting server")
-        cherrypy.quickstart(CherryRequestHandler())
+        handler = CherryRequestHandler()
+        cherrypy.engine.subscribe('start', handler.load)
+        cherrypy.engine.subscribe('stop', handler.save)
+        cherrypy.quickstart(handler)
     except KeyboardInterrupt:
         pass
