@@ -20,6 +20,15 @@ class Users:
         else:
             return user.login(password)
 
+    def getUser(self, name):
+        user = self.all.get(name, None)
+
+        if user == None:
+            print(name)
+            raise SimpleHttpError(404, 'User does not exist')
+        else:
+            return user
+
     def register(self, name, password):
         user = self.all.get(name, None)
 
@@ -59,4 +68,4 @@ class User(Entity):
         
     def validateSessionId(self, sessionId):
         if not sessionId in self.sessions:
-            raise cherrypy.HTTPError(401, 'Invalid sessionId')
+            raise SimpleHttpError(401, 'Invalid sessionId')

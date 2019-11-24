@@ -1,6 +1,7 @@
 import cherrypy
 
 from lib.World import world
+from lib.http.SimpleHttpError import SimpleHttpError
 
 class Authenticationhandler:
     
@@ -25,3 +26,18 @@ class Authenticationhandler:
         cherrypy.response.headers['Content-Type'] = 'text/plain'
         world().users.register(username, password)
         return "Success!"
+
+    @staticmethod
+    def getPlayer(required=False):
+        player = None
+        username = cherrypy.request.cookie.get('username', None)
+        if username != None:
+            sessionId = cherrypy.request.cookie.get('session', None)
+            if sessionId != None:
+                player = world().users.getUser(username.value)
+                player.validateSessionId(sessionId.value)
+
+        if required and player == None:
+            raise SimpleHttpError(400, 'Valid player not supplied')
+        else:
+            return player

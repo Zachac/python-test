@@ -1,4 +1,6 @@
 
+import pprint
+
 class Entity:
     
     def __init__(self):
@@ -17,3 +19,15 @@ class Entity:
 
     def getLocation(self):
         return self._location
+
+    def getCoords(self):
+        if type(self._location) == tuple and len(self._location) == 2:
+            return self._location
+        else:
+            return (None, None)
+
+    def __repr__(self):
+        lines = [f"{{ class: {self.__class__.__name__}"]
+        for key, val in vars(self).items():
+            lines += f"{key}: {val}".split('\n')
+        return ', '.join(lines) + " }"
