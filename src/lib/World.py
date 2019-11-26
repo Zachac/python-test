@@ -1,5 +1,6 @@
 import itertools
 import pickle
+import os.path
 
 from lib.world.Users import Users
 
@@ -28,6 +29,8 @@ def save():
     f.close()
 
 def load():
-    f = open('saves/world.pickle', 'rb')
-    World._instance = pickle.load(f)
-    f.close()
+    file_name = 'saves/world.pickle'
+    if os.path.isfile(file_name):
+        f = open(file_name, 'rb')
+        World._instance = pickle.load(f)
+        f.close()

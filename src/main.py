@@ -16,7 +16,7 @@ if __name__ == "__main__":
         
         cherrypy.tree.mount(object(), '/static/', config={ '/': {
                 'tools.staticdir.on': True,
-                'tools.staticdir.dir': '/home/parity/git/python-test/html/',
+                'tools.staticdir.dir': '/home/zachac/git/python-test/html/',
             },
         })
 
