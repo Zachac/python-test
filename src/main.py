@@ -10,8 +10,17 @@ if __name__ == "__main__":
 
     try:
         handler = CherryRequestHandler()
+        
         cherrypy.engine.subscribe('start', handler.load)
         cherrypy.engine.subscribe('stop', handler.save)
-        cherrypy.quickstart(handler)
+        
+        cherrypy.tree.mount(object(), '/static/', config={ '/': {
+                'tools.staticdir.on': True,
+                'tools.staticdir.dir': '/home/parity/git/python-test/html/',
+            },
+        })
+
+        cherrypy.tree.mount(handler, '/api/')
+        cherrypy.quickstart()
     except KeyboardInterrupt:
         pass
