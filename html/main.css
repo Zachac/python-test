@@ -1,0 +1,25 @@
+
+
+body {margin: 0; padding: 1%}
+pre {margin: 0}
+
+.floating-block {
+    display: inline-block;
+    align-content: center;
+    text-align: center;
+}
+
+.col {
+    width: 15%;
+    height: 100%;
+    float: left;
+}
+
+.main {
+    width: 83%;
+}
+
+input {
+    width: 100%;
+    margin-top: 0.5em;
+}

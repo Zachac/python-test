@@ -8,7 +8,7 @@ class Entity:
         self._location = None
         self.wheight = None
         self.name = None
-        self.setLocation((0,0))
+        self.setLocation((0,10))
         self.id = world().nextId()
 
     def setLocation(self, value):

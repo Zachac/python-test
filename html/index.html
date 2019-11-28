@@ -6,13 +6,23 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Python Test Page</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
 </head>
 
 <body>
     <div>
-        <pre id=map></pre>
+
+        <div class="floating-block col">
+            <input id=username type="text" placeholder="username">
+            <input id=password type="password" placeholder="password">
+            <input id=login-button type="button" value=login onclick="login()">
+            <input id=register-button type="button" value=register onclick="register()">
+        </div>
+        <div class="floating-block main">
+            <pre id=map></pre>
+        </div>
+
     </div>
 </body>
 
